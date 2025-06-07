@@ -59,7 +59,7 @@ public class ZonasPerigoService {
   }
 
   public List<ZonasPerigoDTO> findByAddressId(String addressId) {
-    return repository.findByAddress_Id(addressId).stream()
+    return repository.findById(addressId).stream()
             .map(this::convertToDTO)
             .collect(Collectors.toList());
   }

@@ -15,5 +15,5 @@ public class ZonasPerigo{
 
     private String nivelRisco;
 
-    private Double raioEmkm;
+    private Double raioEmKm;
   }

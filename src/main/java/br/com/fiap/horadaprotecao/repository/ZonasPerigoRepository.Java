@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ZonasPerigoRepository extends JpaRepository<ZonasPerigo, String> {
 
-    List<ZonasPerigo> findById(String Id);
+    List<ZonasPerigo> findById();
 
 }
