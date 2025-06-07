@@ -3,13 +3,14 @@ package br.com.fiap.horadaprotecao.dto;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZonasPerigoDTO{
-  @NotBlank(message = "ID é obrigatório")
-    private UUID uuid;
+public class ZonasPerigoDTO {
 
-    @NotBlank(message = "nivel de risco não valido")
+    @NotBlank(message = "ID é obrigatório")
+    private String id;
+
+    @NotBlank(message = "Nível de risco não é válido")
     private String nivelRisco;
 
-    @NotBlank(message = "Raio não é valido")
+    @NotNull(message = "Raio não é válido")
     private Double raioEmKm;
 }
