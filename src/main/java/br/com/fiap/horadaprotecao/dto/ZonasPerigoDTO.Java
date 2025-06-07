@@ -1,5 +1,6 @@
 package br.com.fiap.horadaprotecao.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,6 @@ public class ZonasPerigoDTO {
     @NotBlank(message = "Nível de risco não é válido")
     private String nivelRisco;
 
-    @NotNull(message = "Raio não é válido")
+    @NotNull
     private Double raioEmKm;
 }
