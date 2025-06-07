@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/zonasperigo")
 @AllArgsConstructor
 @Log
-public class ZonasPerigoController {
+public class ZonasPerigoController {    
 
     private final ZonasPerigoService service;
 
