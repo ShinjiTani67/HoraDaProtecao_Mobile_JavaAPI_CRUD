@@ -1,5 +1,14 @@
 package br.com.fiap.horadaprotecao.service;
 
+import br.com.fiap.horadaprotecao.dto.ZonasPerigoDTO;
+import br.com.fiap.horadaprotecao.entity.ZonasPerigo;
+import br.com.fiap.horadaprotecao.repository.ZonasPerigoRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class ZonasPerigoService {

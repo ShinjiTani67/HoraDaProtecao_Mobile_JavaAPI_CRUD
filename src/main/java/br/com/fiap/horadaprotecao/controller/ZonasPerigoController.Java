@@ -1,5 +1,15 @@
 package br.com.fiap.horadaprotecao.controller;
 
+import br.com.fiap.horadaprotecao.dto.ZonasPerigoDTO;
+import br.com.fiap.horadaprotecao.service.ZonasPerigoService;
+import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/zonasperigo")
 @AllArgsConstructor
