@@ -9,53 +9,38 @@ public class ZonasPerigoController {
     private final ZonasPerigoService service;
 
     @GetMapping
-    public String listZonasPerigo(Model model) {
+    public ResponseEntity<List<ZonasPerigoDTO>> listZonasPerigo() {
         var zonasPerigo = service.getFloodedZone();
         zonasPerigo.forEach(zp -> log.info("ID da zona de perigo: " + zp.getId()));
-        model.addAttribute("zonasperigoList", zonasPerigo);
-        return "zonasperigo";
+        return ResponseEntity.ok(zonasPerigo);
     }
 
     @GetMapping("/test")
-    @ResponseBody
-    public String test() {
-        return "ZonasPerigo funcionando!";
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("ZonasPerigo funcionando!");
     }
 
-    @GetMapping("/new")
-    public String newZonasPerigo(Model model) {
-        model.addAttribute("zonasperigo", new ZonasPerigoDTO());
-        return "zonasperigoformulario";
-    }
-
-    @PostMapping("/save")
-    public String saveZonasPerigo(
-            @Valid @ModelAttribute("zonasperigo") ZonasPerigoDTO zonasPerigoDTO,
-            BindingResult bindingResult,
-            Model model
-    ) {
-        if (bindingResult.hasErrors()) {
-            log.warning("Erros de validação ao salvar zona de perigo:");
-            bindingResult.getAllErrors().forEach(e -> log.warning(e.toString()));
-            model.addAttribute("zonasperigo", zonasPerigoDTO);
-            return "zonasperigoformulario";
+    @PostMapping
+    public ResponseEntity<?> saveZonasPerigo(@Valid @RequestBody ZonasPerigoDTO zonasPerigoDTO) {
+        try {
+            log.info("Salvando zona de perigo: " + zonasPerigoDTO);
+            var saved = service.save(zonasPerigoDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (Exception e) {
+            log.warning("Erro ao salvar zona de perigo: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar zona de perigo");
         }
-
-        log.info("Salvando zona de perigo: " + zonasPerigoDTO);
-        service.save(zonasPerigoDTO);
-        return "redirect:zonasperigo";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editZonasPerigo(@PathVariable String id, Model model) {
-        ZonasPerigoDTO zonasPerigo = service.findById(id);
-        model.addAttribute("zonasperigo", zonasPerigo);
-        return "zonasperigoformulario";
+    @GetMapping("/{id}")
+    public ResponseEntity<ZonasPerigoDTO> getZonasPerigoById(@PathVariable String id) {
+        var zonasPerigo = service.findById(id);
+        return ResponseEntity.ok(zonasPerigo);
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteZonasPerigo(@PathVariable String id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteZonasPerigo(@PathVariable String id) {
         service.deleteById(id);
-        return "redirect:zonasperigo";
+        return ResponseEntity.noContent().build();
     }
 }
