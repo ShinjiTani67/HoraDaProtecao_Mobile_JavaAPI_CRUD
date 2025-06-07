@@ -21,15 +21,11 @@ public class ZonasPerigoController {
 
     @GetMapping
     public ResponseEntity<List<ZonasPerigoDTO>> listZonasPerigo() {
-        var zonasPerigo = service.getFloodedZone();
+        List<ZonasPerigoDTO> zonasPerigo = service.getFloodedZone();
         zonasPerigo.forEach(zp -> log.info("ID da zona de perigo: " + zp.getId()));
         return ResponseEntity.ok(zonasPerigo);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("ZonasPerigo funcionando!");
-    }
 
     @PostMapping
     public ResponseEntity<?> saveZonasPerigo(@Valid @RequestBody ZonasPerigoDTO zonasPerigoDTO) {
