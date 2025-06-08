@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/zonasperigo")
+@RequestMapping("/api")
 @AllArgsConstructor
 @Log
 public class ZonasPerigoController {
